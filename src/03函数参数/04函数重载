@@ -1,0 +1,76 @@
+// 定义重载签名
+function greet(name: string): string;
+function greet(name: string, age: number): string;
+
+// 实现签名（必须兼容所有重载签名）
+function greet(name: string, age?: number): string {
+  if (age !== undefined) {
+    return `Hello, ${name}! You are ${age} years old.`;
+  }
+  return `Hello, ${name}!`;
+}
+
+// 使用
+console.log(greet("Alice")); // "Hello, Alice!"
+console.log(greet("Alice", 25)); // "Hello, Alice! You are 25 years old."
+console.log(greet("Alice", "25")); // ❌ 错误： 类型为 'string' 的参数不能赋给类型为 'number' 的参数
+
+// 处理不同类型的参数
+function process(value: string): string;
+function process(value: number): number;
+function process(value: boolean): boolean;
+
+function process(value: string | number | boolean): string | number | boolean {
+  if (typeof value === "string") {
+    return value.toUpperCase();
+  } else if (typeof value === "number") {
+    return value * 2;
+  } else {
+    return !value;
+  }
+}
+
+console.log(process("hello")); // "HELLO"
+console.log(process(5)); // 10
+console.log(process(true)); // false
+
+// 处理不同的对象结构
+interface NameConfig {
+  name: string;
+}
+
+interface IdConfig {
+  id: number;
+}
+
+function getUser(config: NameConfig): string;
+function getUser(config: IdConfig): number;
+
+function getUser(config: NameConfig | IdConfig): string | number {
+  if ("name" in config) {
+    return config.name;
+  } else {
+    return config.id;
+  }
+}
+
+console.log(getUser({ name: "Alice" })); // "Alice"
+console.log(getUser({ id: 123 })); // 123
+
+// 根据参数类型返回不同的类型
+function getValue(key: "name"): string;
+function getValue(key: "age"): number;
+function getValue(key: "active"): boolean;
+
+function getValue(key: string): string | number | boolean {
+  const data: Record<string, string | number | boolean> = {
+    name: "Alice",
+    age: 25,
+    active: true
+  };
+  return data[key];
+}
+
+const name = getValue("name"); // 类型是 string
+const age = getValue("age"); // 类型是 number
+const active = getValue("active"); // 类型是 boolean

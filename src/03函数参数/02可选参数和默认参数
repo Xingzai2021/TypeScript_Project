@@ -1,0 +1,35 @@
+// 可选参数
+function greet(name: string, greeting?: string): string {
+  if (greeting) {
+    return `${greeting}, ${name}!`;
+  }
+  return `Hello, ${name}!`;
+}
+console.log(greet("Alice")); // "Hello, Alice!"
+console.log(greet("Alice", "Hi")); // "Hi, Alice!"
+
+
+// ❌ 错误：可选参数必须在必需参数之后
+function badExample(optional?: string, required: string) {
+  // ...
+}
+
+
+// 默认参数
+function greet(name: string, greeting: string = "Hello"): string {
+  return `${greeting}, ${name}!`;
+}
+
+console.log(greet("Alice")); // "Hello, Alice!"
+console.log(greet("Alice", "Hi")); // "Hi, Alice!"
+
+// 默认参数可以引用前面的参数
+function createRange(start: number, end: number = start + 10): number[] {
+  const result: number[] = [];
+  for (let i = start; i < end; i++) {
+    result.push(i);
+  }
+  return result;
+}
+
+console.log(createRange(5)); // [5, 6, 7, 8, 9, 10, 11, 12, 13, 14]

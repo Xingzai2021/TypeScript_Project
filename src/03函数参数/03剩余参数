@@ -1,0 +1,58 @@
+// 剩余参数必须是最后一个参数
+function sum(...numbers: number[]): number {
+  return numbers.reduce((total, num) => total + num, 0);
+}
+console.log(sum())
+console.log(sum(1, 2, 3)); // 6
+console.log(sum(1, 2, 3, 4, 5)); // 15
+
+// 混合必需参数和剩余参数
+function greetMany(greeting: string, ...names: string[]): string {
+  return `${greeting}, ${names.join(" and ")}!`;
+}
+
+console.log(greetMany("Hello", "Alice", "Bob", "Charlie"));
+console.log(greetMany("Hello"));
+// "Hello, Alice and Bob and Charlie!"
+
+// 数字数组
+function sumNumbers(...numbers: number[]): number {
+  return numbers.reduce((a, b) => a + b, 0);
+}
+
+// 字符串数组
+function joinStrings(...strings: string[]): string {
+  return strings.join(", ");
+}
+
+// 联合类型数组
+function printValues(...values: (string | number)[]): void {
+  values.forEach(v => console.log(v));
+}
+printValues();
+
+// 对象数组
+interface User {
+  id: number;
+  name: string;
+}
+
+function addUsers(...users: User[]): void {
+  users.forEach(user => console.log(user.name));
+}
+
+// 剩余参数为元组
+function logInfo(status: string, ...rest: [number, string]): void {
+  console.log(status, rest[0], rest[1]);
+}
+
+logInfo("success")
+logInfo("success", 200, "OK"); // ✅
+logInfo("success", 200, "OK"); // ❌ 错误： 期望 3 个参数，却得到 2 个
+
+// 多个剩余元素
+function process(first: string, ...rest: [number, ...string[]]): void {
+  console.log(first, rest[0], rest.slice(1));
+}
+process("start", 42);
+process("start", 42, "a", "b", "c");

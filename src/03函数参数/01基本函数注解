@@ -1,0 +1,21 @@
+// 参数和返回值注解
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+// 调用函数
+let result = add(5, 3); // ✅ 正确
+let result2 = add("5", 3); // ❌ 错误： 类型为 'string' 的参数不能赋给类型为 'number' 的参数
+
+// 没有返回值的函数
+function log(message: string): void {
+  console.log(message);
+}
+
+// 箭头函数
+const multiply = (a: number, b: number): number => {
+  return a * b;
+};
+
+// 简化的箭头函数
+const square = (x: number): number => x * x;

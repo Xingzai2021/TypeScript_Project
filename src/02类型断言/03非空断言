@@ -1,0 +1,11 @@
+// 告诉编译器值不为 null 或 undefined
+function getValue(): string | null {
+  return "hello";
+}
+
+let value = getValue()!; // 断言不为 null
+let length2 = value.length; // ✅ 允许
+
+// ⚠️ 使用非空断言时要确保值确实不为 null
+let nullable: string | null = null;
+let notNull = nullable!; // ❌ 危险！实际上是 null
