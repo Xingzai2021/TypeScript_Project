@@ -74,3 +74,5 @@ function getValue(key: string): string | number | boolean {
 const name = getValue("name"); // 类型是 string
 const age = getValue("age"); // 类型是 number
 const active = getValue("active"); // 类型是 boolean
+
+export {};
